@@ -521,3 +521,17 @@ section { position: relative; z-index: 1; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .btn, .course-card, .faq__icon { transition: none; }
 }
+
+/* Links from course cards to course pages */
+.course-card__media { display: block; border-radius: 18px; overflow: hidden; }
+.course-card__media .course-card__img { transition: transform .4s ease; }
+.course-card__media:hover .course-card__img { transform: scale(1.03); }
+.course-card__title-link { color: inherit; text-decoration: none; }
+.course-card__title-link:hover { color: var(--accent-light); }
+.view-course {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 20px; min-height: 44px;
+  font-weight: 700; font-size: 15px; color: #C4B5FD; text-decoration: none;
+}
+.view-course svg { width: 16px; height: 16px; transition: transform .2s ease; }
+.view-course:hover svg { transform: translateX(3px); }
