@@ -56,9 +56,14 @@
   $('courseSubtitle').textContent = C.subtitle;
   $('courseCover').src = C.cover;
   $('courseCover').alt = C.title + ' course cover';
-  $('docsTitle').textContent = C.documents.title;
-  $('docsDesc').textContent = C.documents.description;
-  $('docsLink').href = C.documents.url;
+  var HAS_DOCS = !!(C.documents && C.documents.url);
+  if (HAS_DOCS) {
+    $('docsTitle').textContent = C.documents.title;
+    $('docsDesc').textContent = C.documents.description;
+    $('docsLink').href = C.documents.url;
+  } else {
+    $('docsCard').remove();
+  }
   $('instructorName').textContent = C.instructors;
   $('instructorRole').textContent = C.instructorRole;
   $('instructorAvatar').innerHTML = C.instructorAvatar
@@ -67,13 +72,16 @@
 
   var soonCount = allLessons.filter(function (l) { return l.comingSoon; }).length;
   $('statModules').textContent = C.modules.length;
-  $('statLessons').textContent = allLessons.length + 1; // + class documents
+  $('statLessons').textContent = allLessons.length + (HAS_DOCS ? 1 : 0);
   $('statSoon').textContent = soonCount;
+  if (!soonCount) $('statSoon').closest('.stat').remove();
 
   /* ---------- Icons ---------- */
   var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
   var ICON_LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
   var ICON_PLAY = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4l13 8-13 8z"/></svg>';
+  var ICON_VIDEO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>';
+  var ICON_PDF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>';
   var ICON_CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
 
   /* ---------- Render modules ---------- */
@@ -93,17 +101,43 @@
         if (l.tag) tags += '<span class="pill">' + esc(l.tag) + '</span>';
         if (soon) tags += '<span class="pill pill--soon">Coming soon</span>';
 
-        var inner =
-          thumb +
-          '<span class="lesson__text">' +
-            '<span class="lesson__num">Lesson ' + (l.index + 1) + '</span>' +
-            '<span class="lesson__title" style="display:block">' + esc(l.title) + '</span>' +
-            (tags ? '<span class="lesson__tags">' + tags + '</span>' : '') +
-          '</span>';
+        var video = l.video || l.url || '';
+        var ext = ' target="_blank" rel="noopener"';
+        var openHref = soon ? '' : (video || '#');
 
-        var link = soon
-          ? '<div class="lesson__link" aria-disabled="true">' + inner + '</div>'
-          : '<a class="lesson__link" href="' + esc(l.url || '#') + '" data-open="' + l.id + '">' + inner + '</a>';
+        var thumbHtml = soon
+          ? '<div class="lesson__thumb" aria-hidden="true">' + thumb + '</div>'
+          : '<a class="lesson__thumb" href="' + esc(openHref) + '"' + (video ? ext : '') +
+              ' data-open="' + l.id + '" tabindex="-1" aria-hidden="true">' + thumb + '</a>';
+
+        var titleHtml = soon
+          ? '<span class="lesson__title">' + esc(l.title) + '</span>'
+          : '<a class="lesson__title" href="' + esc(openHref) + '"' + (video ? ext : '') + ' data-open="' + l.id + '">' + esc(l.title) + '</a>';
+
+        var actions = '';
+        if (!soon) {
+          actions =
+            '<span class="lesson__actions">' +
+              '<a class="res-btn' + (video ? '' : ' is-missing') + '" href="' + esc(video || '#') + '"' + (video ? ext : '') + ' data-open="' + l.id + '">' +
+                ICON_VIDEO + 'Watch video</a>' +
+              (l.pdf !== undefined
+                ? '<a class="res-btn' + (l.pdf ? '' : ' is-missing') + '" href="' + esc(l.pdf || '#') + '"' + (l.pdf ? ext : '') + ' data-pdf="1">' +
+                    ICON_PDF + 'PDF</a>'
+                : '') +
+            '</span>';
+        }
+
+        var inner =
+          thumbHtml +
+          '<div class="lesson__text">' +
+            '<span class="lesson__num">Lesson ' + (l.index + 1) + '</span>' +
+            titleHtml +
+            (l.description ? '<p class="lesson__desc">' + esc(l.description) + '</p>' : '') +
+            (tags ? '<span class="lesson__tags">' + tags + '</span>' : '') +
+            actions +
+          '</div>';
+
+        var link = '<div class="lesson__main">' + inner + '</div>';
 
         var control = soon
           ? '<span class="lock" title="Coming soon">' + ICON_LOCK + '<span class="sr-only">Locked</span></span>'
@@ -114,7 +148,7 @@
             '</label>';
 
         return '<li class="lesson' + (isDone ? ' is-done' : '') + (soon ? ' is-soon' : '') + '" data-id="' + l.id +
-               '" data-title="' + esc(l.title.toLowerCase()) + '">' + link + control + '</li>';
+               '" data-title="' + esc((l.title + ' ' + (l.description || '')).toLowerCase()) + '">' + link + control + '</li>';
       }).join('');
 
       return '' +
@@ -122,8 +156,10 @@
           '<button type="button" class="module__header" aria-expanded="true" aria-controls="panel-' + n + '">' +
             '<span class="module__num">' + (n < 10 ? '0' + n : n) + '</span>' +
             '<span class="module__info">' +
-              '<span class="module__kicker">Module ' + n + '</span>' +
+              '<span class="module__kicker">Module ' + n +
+                (m.tag ? ' <span class="module__tag">' + esc(m.tag) + '</span>' : '') + '</span>' +
               '<span class="module__title" style="display:block">' + esc(m.title) + '</span>' +
+              (m.subtitle ? '<span class="module__subtitle">' + esc(m.subtitle) + '</span>' : '') +
               '<span class="module__meta">' +
                 '<span class="bar bar--sm"><span class="bar__fill" style="display:block"></span></span>' +
                 '<span class="module__count"></span>' +
@@ -152,8 +188,8 @@
   /* ---------- Progress ---------- */
   function updateProgress() {
     var available = allLessons.filter(function (l) { return !l.comingSoon; });
-    var total = available.length + 1; // + documents
-    var completed = available.filter(function (l) { return done[l.id]; }).length + (done.docs ? 1 : 0);
+    var total = available.length + (HAS_DOCS ? 1 : 0);
+    var completed = available.filter(function (l) { return done[l.id]; }).length + (HAS_DOCS && done.docs ? 1 : 0);
     var pct = total ? Math.round((completed / total) * 100) : 0;
 
     var text = completed + ' of ' + total + ' lessons completed';
@@ -164,7 +200,7 @@
     $('heroBarFill').style.width = pct + '%';
     $('heroBar').setAttribute('aria-valuenow', pct);
     $('ringFill').style.strokeDashoffset = CIRC - (CIRC * pct) / 100;
-    $('docsCheck').checked = !!done.docs;
+    if (HAS_DOCS) $('docsCheck').checked = !!done.docs;
 
     // Per-module
     C.modules.forEach(function (m, mi) {
@@ -194,7 +230,9 @@
       $('resumeLabel').textContent = 'Course complete — review';
     }
     if (next) {
-      btn.href = next.url || '#module-' + (next.module + 1);
+      var nextVideo = next.video || next.url;
+      btn.href = nextVideo || '#module-' + (next.module + 1);
+      if (nextVideo) { btn.target = '_blank'; btn.rel = 'noopener'; } else { btn.removeAttribute('target'); }
       btn.dataset.target = next.id;
       $('nextUp').innerHTML = 'Next up: <strong>' + esc(next.title) + '</strong>';
     } else {
@@ -231,7 +269,7 @@
       if (!mod.hidden) anyVisible = true;
     });
 
-    $('docsCard').hidden = !!q && 'class documents download templates'.indexOf(q) === -1;
+    if (HAS_DOCS) $('docsCard').hidden = !!q && 'class documents download templates'.indexOf(q) === -1;
     $('noResults').hidden = anyVisible;
   }
 
@@ -259,7 +297,7 @@
       updateProgress();
       if (currentFilter !== 'all') applyFilters();
       if (input.checked) {
-        var all = allLessons.filter(function (l) { return !l.comingSoon; }).every(function (l) { return done[l.id]; }) && done.docs;
+        var all = allLessons.filter(function (l) { return !l.comingSoon; }).every(function (l) { return done[l.id]; }) && (!HAS_DOCS || done.docs);
         toast(all ? 'Course complete — amazing work!' : 'Lesson marked as complete');
       }
     });
@@ -273,13 +311,13 @@
       updateToggleAllLabel();
     });
 
-    // Lesson links: if no real URL yet, scroll & flash instead of jumping to top
+    // Lesson links: if a video/PDF link hasn't been added yet, say so instead of jumping to the top
     $('modules').addEventListener('click', function (e) {
-      var a = e.target.closest('a.lesson__link');
+      var a = e.target.closest('a[data-open], a[data-pdf]');
       if (!a) return;
       if (a.getAttribute('href') === '#') {
         e.preventDefault();
-        toast('Lesson link not added yet');
+        toast(a.hasAttribute('data-pdf') ? 'PDF not added yet' : 'Video link not added yet');
       }
     });
 

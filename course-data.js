@@ -2,128 +2,146 @@
    COURSE CONTENT — edit this file to change the course page.
 
    Each lesson can have:
-     title      (required)  lesson name
-     url        (optional)  link to the lesson/video page
-     thumb      (optional)  path to a thumbnail image, e.g. "assets/thumbs/start-here.jpg"
-                            (if left out, a styled title tile is shown instead)
-     comingSoon (optional)  true = locked, shown with a "Coming soon" badge
-     tag        (optional)  short label, e.g. "Templates" or "Script"
+     title        (required)  lesson name
+     description  (optional)  short summary shown under the title
+     video        (optional)  link to the lesson video (GHL lesson link, Vimeo, YouTube…)
+     pdf          (optional)  link to the lesson's PDF / attached document
+     thumb        (optional)  thumbnail image path
+     comingSoon   (optional)  true = locked, shown with a "Coming soon" badge
+
+   Each module can have:
+     title, subtitle (optional), tag (optional, e.g. "Mandatory")
    ========================================================= */
 
 window.COURSE = {
-  id: "pest-control-va-accelerator",          // used to save progress — keep unique per course
+  id: "pest-control-va-accelerator",          // used to save progress, keep unique per course
   title: "Pest Control VA Accelerator",
-  subtitle: "The complete system to win more customers, automate your follow-up and grow a pest control business that runs without you.",
+  subtitle: "An accelerator course for your virtual assistant. The goal is to give your assistant a strong base knowledge of pest control and pest sales, plus the tools and skills to start contributing quickly.",
   cover: "assets/pest-control-va-accelerator.png",
-  instructors: "Jonas Olson & Jake Sheldon",
-  instructorRole: "Instructors",
-  instructorAvatar: "",                       // e.g. "assets/instructors.jpg" — initials shown if empty
+  instructors: "Next Gen Staffing",
+  instructorRole: "Instructor",
+  instructorAvatar: "",                       // e.g. "assets/logo.png" (initials shown if empty)
 
-  documents: {
-    title: "Class Documents",
-    description: "Templates, scripts and guides used throughout the course.",
-    url: "#"                                   // TODO: link to your downloadable documents
-  },
+  // Optional course-wide downloads card. Set to null to hide it.
+  documents: null,
 
   modules: [
     {
-      title: "30 Sales In 30 Days",
+      title: "Introduction",
+      subtitle: "For both owners & assistants",
       lessons: [
-        { title: "Start Here", url: "#" },
-        { title: "4 Steps To Dominating Your Local Market", url: "#" },
-        { title: "How To Generate Free Leads On Nextdoor", tag: "Templates", url: "#" },
-        { title: "How To Get 1000's Of Free Leads With Strategic Partnerships", url: "#" },
-        { title: "How To Reactivate Old Customers", tag: "Templates", url: "#" },
-        { title: "Mosquito Upsell Campaigns", comingSoon: true },
-        { title: "30 Sales In 30 Days", tag: "Free guide", url: "#" }
+        {
+          title: "Welcome to the Course",
+          description: "Welcome to the Pest Control Virtual Assistant Accelerator! Whether you're the owner or the virtual assistant, please watch this video to get an understanding of what to expect from this course.",
+          thumb: "assets/thumbs/welcome.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "About Your Instructor",
+          description: "Jake started his entrepreneurial journey at a young age and has always been obsessed with marketing. For the last 10+ years he has dedicated his career to digital marketing and advertising in the pest control space.",
+          thumb: "assets/thumbs/about-instructor.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "How To Onboard A Pest Control Admin",
+          description: "Watch the video and use the attached document to properly and effectively onboard a new pest control admin.",
+          thumb: "assets/thumbs/onboarding.jpg",
+          video: "", pdf: ""
+        }
       ]
     },
     {
-      title: "Mastering Facebook Ads",
+      title: "Pest Control Basics",
+      tag: "Mandatory",
       lessons: [
-        { title: "Getting Started With Facebook Ads", url: "#" },
-        { title: "How To Choose The Right Targeting (Part 1)", url: "#" },
-        { title: "How To Choose The Right Targeting (Part 2)", url: "#" },
-        { title: "The Do's and Don'ts Of Facebook Ads", tag: "Examples", url: "#" },
-        { title: "How To Write Winning Advertisements", url: "#" },
-        { title: "How To Create A Lead Form That Converts", url: "#" },
-        { title: "How To Effectively Run Retargeting Ads", url: "#" },
-        { title: "How To Ethically Spy On Your Competitors", url: "#" },
-        { title: "How To Split Test Like A Pro", url: "#" },
-        { title: "How To Target Lookalike Customers", comingSoon: true }
+        {
+          title: "Day In The Life Of A Technician",
+          description: "Video examples of what the day-to-day life of a pest control technician looks like.",
+          thumb: "assets/thumbs/day-in-the-life.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "General Pest Control vs. Specialty Pest (Intro)",
+          description: "The difference between general pest and specialty pest control treatments. Keep in mind every pest control company is different, so learn and understand your company's practices for each treatment.",
+          thumb: "assets/thumbs/general-vs-specialty.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "General Pest Control Training",
+          description: "An in-depth guide to everything you need to know about general pest control. Go through the document in detail, then watch the instructional video on common general pest control practices.",
+          thumb: "assets/thumbs/general-pest-basics.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "Specialty Pest Control Training",
+          description: "An in-depth guide to all the basics of specialty pest control. Each company likely has variations of these treatments, but the ideas will be similar.",
+          thumb: "assets/thumbs/specialty-pest-basics.jpg",
+          video: "", pdf: ""
+        }
       ]
     },
     {
-      title: "Automation Mastery",
+      title: "How To Sell Pest Control",
+      tag: "Mandatory",
       lessons: [
-        { title: "How To Set Up NextGenofLeads.com", url: "#" },
-        { title: "How To Connect Your Facebook Page & Your Lead Form", url: "#" },
-        { title: "How To Track & Follow Up With Your Leads In NextGenofLeads.com", url: "#" },
-        { title: "How To Automate Your Follow Up In NextGenofLeads.com", url: "#" },
-        { title: "How To Build An AI Agent", comingSoon: true }
+        {
+          title: "Sales: How To Set Appointments (Script Walkthrough)",
+          description: "Pest control sales is less sales and more education. The people reaching out have a problem and you have the solution: show them how the service is done and how you can get rid of their problem.",
+          thumb: "assets/thumbs/script-walkthrough.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "Objection Handling",
+          description: "Objection handling is key in any customer-facing role. Study these responses until you know them by heart, and practise live role-plays over and over.",
+          thumb: "assets/thumbs/objection-handling.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "How To Sell General Pest Control (Live Example)",
+          description: "A live example of a real sales call.",
+          thumb: "assets/thumbs/how-to-sell.jpg",
+          video: "", pdf: ""
+        }
       ]
     },
     {
-      title: "How To Sell Like The Top 1%",
+      title: "Common Pest Control Tools",
       lessons: [
-        { title: "Mastering Sales Part 1", tag: "Script", url: "#" },
-        { title: "Mastering Sales Part 2", url: "#" },
-        { title: "Door To Door Sales Script", comingSoon: true },
-        { title: "How Jackson Sold 1000 Sales By Himself In 1 Year", comingSoon: true }
+        {
+          title: "Gorilla Desk Basic Training",
+          description: "Scheduling training for Gorilla Desk. Gorilla Desk also has its own YouTube channel for more specific training if needed.",
+          thumb: "assets/thumbs/gorilla-desk.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "FieldRoutes Basic Overview",
+          description: "Basic operations training for FieldRoutes. This covers the basics so you learn faster; your team should still show you exactly how they use the software and schedule services.",
+          thumb: "assets/thumbs/fieldroutes.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "GoHighLevel Basic Training",
+          description: "GoHighLevel lead management training. Your team should still show you exactly how they use the software. Any other GHL questions can be answered in this channel.",
+          thumb: "assets/thumbs/gohighlevel.jpg",
+          video: "", pdf: ""
+        }
       ]
     },
     {
-      title: "How To Work Less & Get Paid More",
+      title: "Advanced Tips",
       lessons: [
-        { title: "How To Master Goal Setting & Delegation", url: "#" },
-        { title: "How To Save 60% Or More On Office Wages Every Year", url: "#" },
-        { title: "How To Hire Virtual Assistants", url: "#" },
-        { title: "How To Onboard Office Staff", url: "#" },
-        { title: "How To Delegate With Standard Operating Procedures (SOPs)", url: "#" },
-        { title: "Strategic Partnership Set Up", url: "#" },
-        { title: "What Our Virtual Assistants Do", comingSoon: true }
-      ]
-    },
-    {
-      title: "How To Go Viral",
-      lessons: [
-        { title: "10 Myths Of YouTube", url: "#" },
-        { title: "YouTube & Social Media Archetypes", url: "#" },
-        { title: "How To Track YouTube KPIs", url: "#" },
-        { title: "How To Hire Video Editors", url: "#" },
-        { title: "Viral Video Examples", comingSoon: true }
-      ]
-    },
-    {
-      title: "Generate Revenue ASAP",
-      lessons: [
-        { title: "Generate 1000's Of Free Leads This Month (Strategic Partnerships)", url: "#" }
-      ]
-    },
-    {
-      title: "Master SEO",
-      lessons: [
-        { title: "Introduction & Overview Of SEO", url: "#" },
-        { title: "Understanding SEO", url: "#" },
-        { title: "Understanding Google", url: "#" },
-        { title: "Understanding The Customer Journey", url: "#" },
-        { title: "How To Win Your Google Business Profile", url: "#" },
-        { title: "How To Win Website SEO", url: "#" },
-        { title: "What To Set Up For SEO", url: "#" },
-        { title: "What To Keep Doing For SEO", url: "#" },
-        { title: "Summary & Conclusion", url: "#" }
-      ]
-    },
-    {
-      title: "How To Generate Leads With Google LSA Ads",
-      lessons: [
-        { title: "How To Win Local Service Ads", url: "#" }
-      ]
-    },
-    {
-      title: "Email Marketing",
-      lessons: [
-        { title: "1 Year Email Sequence For Current Pest Control Customers", url: "#" }
+        {
+          title: "Customer Service Script",
+          description: "Customer service is similar to selling new leads, with slightly different ways to handle the customer. Whether or not you're in a customer service role, going through this will improve your overall skills.",
+          thumb: "assets/thumbs/customer-service.jpg",
+          video: "", pdf: ""
+        },
+        {
+          title: "Social Media Management & Posting",
+          description: "An outline of how to build your pest control company's brand through social media. Each part can be done on its own, or do them all for the best branding results.",
+          thumb: "assets/thumbs/social-media.jpg",
+          video: "", pdf: ""
+        }
       ]
     }
   ]

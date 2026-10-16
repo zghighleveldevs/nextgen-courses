@@ -502,3 +502,84 @@ main { position: relative; z-index: 1; }
 }
 
 [hidden] { display: none !important; }
+
+/* =========================================================
+   Lesson layout v2 — thumbnail, description, Video / PDF buttons
+   ========================================================= */
+.lesson { align-items: flex-start; padding: 14px; }
+.lesson__main { flex: 1; min-width: 0; display: flex; align-items: flex-start; gap: 18px; }
+
+.lesson__thumb { display: block; flex-shrink: 0; border-radius: 12px; }
+.lesson__thumb .thumb { width: 184px; }
+.lesson__thumb:hover .thumb__play { opacity: 1; }
+.lesson__thumb .thumb img { object-fit: cover; }
+
+.lesson__text { flex: 1; min-width: 0; padding-top: 2px; }
+.lesson__title {
+  display: block;
+  margin-top: 2px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text);
+  text-decoration: none;
+}
+a.lesson__title:hover { color: var(--accent-light); }
+.lesson__desc {
+  margin: 6px 0 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lesson__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.res-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(124,58,237,.18);
+  border: 1px solid rgba(167,139,250,.35);
+  color: #EDE9FE;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .2s ease, transform .2s ease;
+}
+.res-btn svg { width: 16px; height: 16px; }
+.res-btn:hover { background: rgba(124,58,237,.32); color: #fff; transform: translateY(-1px); }
+.res-btn.is-missing { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.12); color: var(--muted-2); }
+.res-btn.is-missing:hover { background: rgba(255,255,255,.07); color: var(--muted); transform: none; }
+
+.lesson .check { margin-top: 4px; }
+.lesson.is-done .lesson__title { color: var(--muted-2); }
+
+.module__tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(251,191,36,.12);
+  border: 1px solid rgba(251,191,36,.35);
+  color: #FCD34D;
+  font-size: 11px;
+  letter-spacing: .08em;
+  vertical-align: 1px;
+}
+.module__subtitle { display: block; margin-top: 2px; font-size: 14px; color: var(--muted-2); font-weight: 600; }
+
+@media (max-width: 760px) {
+  .lesson { padding: 12px 6px; }
+  .lesson__main { flex-direction: column; gap: 12px; }
+  .lesson__thumb .thumb { width: 100%; max-width: 320px; font-size: 11px; }
+  .lesson__title { font-size: 16px; }
+}
+@media (max-width: 420px) {
+  .lesson__thumb { display: none; }
+}
