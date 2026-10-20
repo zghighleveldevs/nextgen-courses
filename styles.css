@@ -641,3 +641,6 @@ section { position: relative; z-index: 1; }
     width: fit-content; margin: 14px auto 0;
   }
 }
+
+/* New cover is 3:2, show it whole (no cropping of "Training Course") */
+.showcase__main, .course-card__img { aspect-ratio: 1280 / 853; object-fit: cover; }
