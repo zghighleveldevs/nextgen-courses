@@ -24,7 +24,7 @@ window.COURSE = {
     { title: "Which Automations Should You Turn On?",                         driveId: "1o_coRkdiZqBMwQMmE2yqqJOqsLq4uqOu" }, // which automation should you....mp4
     { title: "Pest Control AI Setup",                                         driveId: "1tNqaa8ajbP6Y0tlXXpGSe_Z3zDalQyZd" }, // pest control ai setting up.mp4
     { title: "Lead Management",                                               driveId: "1jmb1FG3QMNp5zLmBN8c9x_Pwn8w70LXZ" }, // lead management.mp4
-    { title: "Social Planner: How To Post From One Platform",                 driveId: "" },                                  // DUMMY: video not recorded yet
+    { title: "Social Planner: How To Post From One Platform",                 driveId: "1vYSZDAfFckq4HVtjNBtgo2OsB9OpLo7o" }, // social plannerr.mp4
     { title: "Common Issues and Solutions",
       description: "Links mentioned in this video will be added here.",      driveId: "1W9OvzY8XPnnurVDVMDatdthB2NmVxV04" }  // common issues.mp4
   ]
