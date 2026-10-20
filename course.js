@@ -84,7 +84,7 @@
 
     updateComplete();
     renderList();
-    document.title = l.title + ' | NextGen Leads Training';
+    document.title = l.title + ' | NextGen Desk';
     if (push !== false) history.replaceState(null, '', '#lesson-' + (current + 1));
   }
 

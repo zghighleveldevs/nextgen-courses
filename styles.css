@@ -551,3 +551,11 @@ section { position: relative; z-index: 1; }
 .go-box__label { font-size: 13px; color: var(--muted-2); font-weight: 600; }
 .go-box__value { font-family: var(--font-display); font-weight: 800; font-size: 22px; }
 @media (max-width: 760px) { .go-box .btn { width: 100%; } }
+
+/* NextGen Desk logo */
+.brand__logo { height: 44px; width: auto; filter: drop-shadow(0 6px 14px rgba(124,58,237,.35)); }
+.brand__accent { color: var(--accent-light); }
+.footer__logo { height: 28px; width: auto; }
+@media (max-width: 760px) { .brand__logo { height: 38px; } .brand__name { font-size: 18px; } }
+.brand__name, .nav__back { white-space: nowrap; }
+@media (max-width: 420px) { .brand__name { display: none; } .brand__logo { height: 42px; } }
