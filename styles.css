@@ -559,3 +559,85 @@ section { position: relative; z-index: 1; }
 @media (max-width: 760px) { .brand__logo { height: 38px; } .brand__name { font-size: 18px; } }
 .brand__name, .nav__back { white-space: nowrap; }
 @media (max-width: 420px) { .brand__name { display: none; } .brand__logo { height: 42px; } }
+
+/* =========================================================
+   Responsive polish (all screen sizes)
+   ========================================================= */
+.section-title, .hero__title, .cta__title, .course-card__title { text-wrap: balance; }
+.section-intro, .hero__text, .cta__text { text-wrap: pretty; }
+
+/* How it works: 3 across on tablet+ (no lonely third card), stacked on phones */
+.steps__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 720px) { .steps__grid { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; } }
+@media (min-width: 721px) and (max-width: 900px) { .step { padding: 24px 20px; } .step h3 { font-size: 19px; } }
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .hero { gap: 44px; padding: 64px 0 80px; }
+  .courses, .compare, .steps, .faq { padding-bottom: 80px; }
+}
+@media (max-width: 900px) {
+  .hero__copy, .hero__visual { flex-basis: 100%; }
+  .hero__copy { text-align: left; }
+  .faq__layout { gap: 28px; }
+}
+
+/* Phones */
+@media (max-width: 760px) {
+  .container { padding: 0 16px; }
+  .site-header { padding-top: 12px; }
+  .nav { padding: 10px 10px 10px 14px; border-radius: 18px; }
+  .hero { padding: 40px 0 64px; gap: 48px; }
+  .hero__title { margin-top: 18px; }
+  .hero__text { margin-top: 18px; }
+  .hero__actions { margin-top: 28px; }
+  .hero__actions .btn { flex: 1 1 auto; }
+  .showcase { padding: 14px; border-radius: 24px; }
+  .showcase__chip { left: 50%; transform: translateX(-50%); white-space: nowrap; }
+
+  .courses, .compare, .steps, .faq { padding: 8px 0 64px; }
+  .cta { padding: 8px 0 56px; }
+  .course-grid { margin-top: 32px; }
+  .course-card { padding: 12px; border-radius: 22px; }
+  .course-card__body { padding: 20px 8px 6px; }
+  .course-card__img { border-radius: 14px; }
+
+  .compare__panel { padding: 24px 18px; border-radius: 24px; }
+  .compare__grid { margin-top: 22px; }
+  .compare__card { padding: 22px 18px; border-radius: 18px; }
+
+  .step { padding: 24px 22px; border-radius: 22px; }
+  .step__num { width: 52px; height: 52px; font-size: 19px; border-radius: 16px; }
+  .step h3 { margin-top: 18px; }
+
+  .faq__item summary { padding: 18px 18px; font-size: 16px; }
+  .faq__item p { padding: 0 18px 18px; }
+
+  .cta__panel { border-radius: 26px; }
+  .cta__actions .btn { flex: 1 1 200px; }
+
+  .footer { padding: 24px 0 32px; justify-content: center; text-align: center; }
+  .footer__brand { justify-content: center; }
+  .footer__links { justify-content: center; }
+}
+@media (max-width: 420px) {
+  .go-box { flex-direction: column; align-items: stretch; text-align: center; padding: 16px; }
+  .go-box__value { font-size: 20px; }
+  .section-intro { font-size: 16px; }
+  .compare__card ul { padding-left: 18px; font-size: 15px; }
+}
+@media (max-width: 360px) {
+  .hero__actions .btn { flex-basis: 100%; }
+  .course-card__title { font-size: 22px; }
+}
+
+/* Large screens */
+@media (min-width: 1440px) {
+  :root { --container: 1240px; }
+}
+@media (max-width: 760px) {
+  .showcase--single .showcase__chip {
+    position: relative; left: auto; bottom: auto; transform: none;
+    width: fit-content; margin: 14px auto 0;
+  }
+}

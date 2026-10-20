@@ -60,7 +60,8 @@
         '<iframe src="https://drive.google.com/file/d/' + encodeURIComponent(l.driveId) + '/preview"' +
         ' title="' + esc(l.title) + '" allow="autoplay; fullscreen" allowfullscreen' +
         ' referrerpolicy="no-referrer"></iframe>' +
-        '<div class="player__shield" aria-hidden="true"></div>';
+        '<a class="player__shield" href="watch.html#lesson-' + (current + 1) + '" target="_blank" rel="noopener"' +
+        ' title="Open video in a new tab" aria-label="Open this video in a new tab"></a>';
     } else {
       frame.innerHTML =
         '<div class="player__empty">' +
