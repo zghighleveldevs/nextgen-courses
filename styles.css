@@ -535,3 +535,10 @@ section { position: relative; z-index: 1; }
 }
 .view-course svg { width: 16px; height: 16px; transition: transform .2s ease; }
 .view-course:hover svg { transform: translateX(3px); }
+
+/* Single-course layout */
+.course-grid--single { grid-template-columns: minmax(0, 680px); justify-content: center; }
+.showcase--single .showcase__chip { bottom: -24px; }
+@media (max-width: 760px) { .showcase--single .showcase__chip { bottom: -20px; } }
+/* Keep covers at their real shape on small screens (the img height attribute was forcing 268px) */
+.showcase__main, .course-card__img { height: auto; }
