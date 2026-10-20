@@ -276,4 +276,18 @@ main { position: relative; z-index: 1; }
 /* Top-right "open in new tab" button over the player */
 a.player__shield { display: block; cursor: pointer; border-radius: 0 16px 0 12px; }
 a.player__shield:focus-visible { outline: 2px solid var(--accent-light); outline-offset: -4px; }
-@media (max-width: 760px) { a.player__shield { width: 64px; height: 56px; } }
+
+/* Phones: cover Google's "open in new window" icon with a NextGen Desk badge (not clickable) */
+@media (max-width: 760px) {
+  a.player__shield {
+    top: 0; right: 0; width: 96px; height: 56px;
+    border-radius: 0 0 0 14px;
+    background: rgba(10,8,18,.92) url("assets/nextgen-desk-logo-sm.png") center / 60px auto no-repeat;
+    box-shadow: 0 4px 12px rgba(0,0,0,.4);
+    cursor: default;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Make sure the cover reaches Google's icon on every screen */
+.player__shield { width: 96px; height: 60px; }

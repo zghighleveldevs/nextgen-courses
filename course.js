@@ -141,6 +141,12 @@
     toast('Progress reset');
   });
 
+  // On phones the corner button is just a logo badge: tapping it does nothing
+  var MOBILE = window.matchMedia('(max-width: 760px)');
+  $('playerFrame').addEventListener('click', function (e) {
+    if (MOBILE.matches && e.target.closest('.player__shield')) e.preventDefault();
+  });
+
   // Block right-click and common "save" shortcuts on the page
   document.addEventListener('contextmenu', function (e) {
     if (e.target.closest('.player')) e.preventDefault();
