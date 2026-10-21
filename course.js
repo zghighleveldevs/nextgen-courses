@@ -1,5 +1,5 @@
 /* =========================================================
-   NextGen Leads Training — course player logic
+   NextGen Desk Training — course player logic
    Plays each lesson from Google Drive and saves progress
    in the student's browser.
    ========================================================= */

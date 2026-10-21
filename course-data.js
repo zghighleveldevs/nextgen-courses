@@ -1,5 +1,5 @@
 /* =========================================================
-   NEXTGEN LEADS TRAINING — course content
+   NEXTGEN DESK TRAINING — course content
    Edit this file to change lessons.
 
    Each lesson:
@@ -13,7 +13,7 @@
 
 window.COURSE = {
   id: "nextgen-leads-training",
-  title: "NextGen Leads Training",
+  title: "NextGen Desk Training",
   lessons: [
     { title: "Quick Overview",                        tag: "Watch first",     driveId: "1qdGCIFUuy8XsERh2bNrOWncPJXRnHAfT" }, // overview.mp4
     { title: "Settings Set Up",                       tag: "Must watch",      driveId: "10-vanGIuQKbT7UuWVKWMqdpxrTpFIZlB" }, // settings set up.mp4
